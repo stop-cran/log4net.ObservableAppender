@@ -34,6 +34,26 @@ namespace log4net.Appender.Tests
         }
 
         [Test]
+        public void ShouldHaveCorrectMessage()
+        {
+            var actionMock = new Mock<Action<string>>();
+            appender.LoggingEvents.Subscribe(e => actionMock.Object(e.RenderedMessage));
+            logger.Debug("test");
+
+            actionMock.Verify(x => x("test"));
+        }
+
+        [Test]
+        public void ShouldHaveCorrectLevel()
+        {
+            var actionMock = new Mock<Action<Level>>();
+            appender.LoggingEvents.Subscribe(e => actionMock.Object(e.Level));
+            logger.Debug("test");
+
+            actionMock.Verify(x => x(Level.Debug));
+        }
+
+        [Test]
         public void ShouldCompleteOnShutDown()
         {
             appender.LoggingEvents.Subscribe(mock.Object);
