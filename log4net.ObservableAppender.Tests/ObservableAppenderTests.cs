@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Reflection;
 
-namespace log4net.ObservableAppender.Tests
+namespace log4net.Appender.Tests
 {
     [TestFixture]
     public class ObservableAppenderTests

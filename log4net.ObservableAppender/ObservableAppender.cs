@@ -1,9 +1,8 @@
-﻿using log4net.Appender;
-using log4net.Core;
+﻿using log4net.Core;
 using System;
 using System.Reactive.Linq;
 
-namespace log4net.ObservableAppender
+namespace log4net.Appender
 {
     /// <summary>
     /// In-memory appender, that streams logging events into IObservable&lt;LoggingEvent&gt;.

@@ -2,7 +2,7 @@
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace log4net.ObservableAppender
+namespace log4net.Appender
 {
     internal static class ObservableExtensions
     {

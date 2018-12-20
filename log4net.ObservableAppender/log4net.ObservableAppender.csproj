@@ -12,6 +12,7 @@
     <PackageTags>log4net appender Rx Reactive Extensions Observable LINQ Events</PackageTags>
     <PackageReleaseNotes>First version.</PackageReleaseNotes>
     <DocumentationFile>log4net.ObservableAppender.xml</DocumentationFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
