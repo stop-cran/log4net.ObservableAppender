@@ -1,6 +1,7 @@
 ﻿using log4net.Core;
 using System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace log4net.Appender
 {
@@ -9,25 +10,9 @@ namespace log4net.Appender
     /// </summary>
     public class ObservableAppender : AppenderSkeleton
     {
-        private event Action<LoggingEvent> OnLoggingEvent;
-
-        private event Action<LoggingEvent> OnCloseEvent;
-
+        private readonly Subject<LoggingEvent> loggingEventsSubject = new Subject<LoggingEvent>();
         private IObservable<LoggingEvent> loggingEventsReplay;
-
         private IDisposable subscription;
-
-        private IObservable<LoggingEvent> WrapEvent() =>
-            Observable
-                .FromEvent<LoggingEvent>(
-                    d => OnLoggingEvent += d,
-                    d => OnLoggingEvent -= d)
-                .AlsoCompleteOn(
-                    Observable
-                        .FromEvent<LoggingEvent>(
-                            d => OnCloseEvent += d,
-                            d => OnCloseEvent -= d)
-                        .Take(1));
 
         /// <summary>
         /// False - (default) do not persist any logging events. Every subscriber of LoggingEvents will recieve only ongoing logging events, without ones that occurred before subscription.
@@ -43,7 +28,7 @@ namespace log4net.Appender
                     if (value)
                     {
                         // Keep alive until no subscribers left.
-                        loggingEventsReplay = WrapEvent().Replay().RefCount();
+                        loggingEventsReplay = loggingEventsSubject.Replay().RefCount();
                         // Subscribe internally to keep alive at least until OnClose.
                         subscription = loggingEventsReplay.Subscribe();
                     }
@@ -60,14 +45,14 @@ namespace log4net.Appender
         /// optionally including history (i.e. the events came before the subscription to this observable).
         /// Completes on the repository shutdown or an explicit Close() call.
         /// </summary>
-        public IObservable<LoggingEvent> LoggingEvents => loggingEventsReplay ?? WrapEvent();
+        public IObservable<LoggingEvent> LoggingEvents => loggingEventsReplay ?? loggingEventsSubject;
 
         /// <summary>
         /// An override. Sends an incoming loggingEvent to LoggingEvents observable.
         /// </summary>
         /// <param name="loggingEvent">An incoming logging event</param>
         protected override void Append(LoggingEvent loggingEvent) =>
-            OnLoggingEvent?.Invoke(loggingEvent);
+            loggingEventsSubject.OnNext(loggingEvent);
 
         /// <summary>
         /// An override. Completes the LoggingEvents
@@ -76,7 +61,8 @@ namespace log4net.Appender
         {
             if (Persist)
                 subscription.Dispose();
-            OnCloseEvent?.Invoke(default);
+            loggingEventsSubject.OnCompleted();
+            loggingEventsSubject.Dispose();
             base.OnClose();
         }
     }

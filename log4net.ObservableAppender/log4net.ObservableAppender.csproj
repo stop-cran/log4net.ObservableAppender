@@ -10,9 +10,9 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/stop-cran/log4net.ObservableAppender</PackageProjectUrl>
     <PackageTags>log4net appender Rx Reactive Extensions Observable LINQ Events</PackageTags>
-    <PackageReleaseNotes>First version.</PackageReleaseNotes>
+    <PackageReleaseNotes>Simplified the code.</PackageReleaseNotes>
     <DocumentationFile>log4net.ObservableAppender.xml</DocumentationFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
