@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>log4net.ObservableAppender</name>
+    </assembly>
+    <members>
+        <member name="T:log4net.Appender.ObservableAppender">
+            <summary>
+            In-memory appender, that streams logging events into IObservable&lt;LoggingEvent&gt;.
+            </summary>
+        </member>
+        <member name="P:log4net.Appender.ObservableAppender.Persist">
+            <summary>
+            False - (default) do not persist any logging events. Every subscriber of LoggingEvents will recieve only ongoing logging events, without ones that occurred before subscription.
+            True - persist all logging events in memory. Every new LoggingEvents subscriber gets all past logs first, and then ongoing logs.
+            Occurs until repository shutdown/appender close or longer in case still there are any subscriptions.
+            </summary>
+        </member>
+        <member name="P:log4net.Appender.ObservableAppender.LoggingEvents">
+            <summary>
+            An observable, that contains all logging events matched,
+            optionally including history (i.e. the events came before the subscription to this observable).
+            Completes on the repository shutdown or an explicit Close() call.
+            </summary>
+        </member>
+        <member name="M:log4net.Appender.ObservableAppender.Append(log4net.Core.LoggingEvent)">
+            <summary>
+            An override. Sends an incoming loggingEvent to LoggingEvents observable.
+            </summary>
+            <param name="loggingEvent">An incoming logging event</param>
+        </member>
+        <member name="M:log4net.Appender.ObservableAppender.OnClose">
+            <summary>
+            An override. Completes the LoggingEvents
+            </summary>
+        </member>
+    </members>
+</doc>

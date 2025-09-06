@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "log4net.ObservableAppender", "log4net.ObservableAppender\log4net.ObservableAppender.csproj", "{D11D5A82-FC53-4CB7-B122-AC7CC96E4FF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "log4net.ObservableAppender", "src\log4net.ObservableAppender.csproj", "{D11D5A82-FC53-4CB7-B122-AC7CC96E4FF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.ObservableAppender.Tests", "log4net.ObservableAppender.Tests\log4net.ObservableAppender.Tests.csproj", "{72A83F02-7521-4168-96A4-CF9A1BCA7955}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.ObservableAppender.Tests", "tests\log4net.ObservableAppender.Tests.csproj", "{72A83F02-7521-4168-96A4-CF9A1BCA7955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
