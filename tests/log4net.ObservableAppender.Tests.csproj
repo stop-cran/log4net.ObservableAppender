@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\src\log4net.ObservableAppender.csproj" />
   </ItemGroup>
 
